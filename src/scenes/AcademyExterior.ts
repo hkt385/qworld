@@ -182,12 +182,11 @@ this.enterPrompt
     }
 
     // Vertical movement
-    if (this.keys.W.isDown || this.cursors.up.isDown) {
-      vy = -speed;
-    } else if (this.keys.S.isDown || this.cursors.down.isDown) {
-      vy = speed;
-    }
-
+   if (this.keys.W.isDown || this.cursors.up.isDown || this.dpad.up) {
+    vy = -speed;
+} else if (this.keys.S.isDown || this.cursors.down.isDown || this.dpad.down) {
+    vy = speed;
+}
     this.player.setVelocity(vx, vy);
 
     const body = this.player.body as Phaser.Physics.Arcade.Body;
