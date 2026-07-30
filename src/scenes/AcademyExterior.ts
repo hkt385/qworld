@@ -1,11 +1,13 @@
 import Phaser from "phaser";
 import AudioManager from "../utils/AudioManager";
+import MobileDPad from "../ui/MobileDPad";
 
 export default class AcademyExterior extends Phaser.Scene {
   
 private enterPrompt!: Phaser.GameObjects.Text;
   private player!: Phaser.Physics.Arcade.Sprite;
   private interactKey!: Phaser.Input.Keyboard.Key;
+  private dpad!: MobileDPad;
 
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
 
@@ -51,6 +53,7 @@ this.load.spritesheet(
 
   create() {
     // E key
+    this.dpad = new MobileDPad(this);
     AudioManager.play(this, "exteriorMusic", 0.30);
     
 
@@ -172,9 +175,9 @@ this.enterPrompt
     let vy = 0;
 
     // Horizontal movement
-    if (this.keys.A.isDown || this.cursors.left.isDown) {
+    if (this.keys.A.isDown || this.cursors.left.isDown || this.dpad.left) {
       vx = -speed;
-    } else if (this.keys.D.isDown || this.cursors.right.isDown) {
+    } else if (this.keys.D.isDown || this.cursors.right.isDown || this.dpad.right) {
       vx = speed;
     }
 
