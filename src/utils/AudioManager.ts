@@ -32,7 +32,7 @@ export default class AudioManager {
 
         } else {
 
-            music.setVolume(this.getVolume(defaultVolume));
+            music.volume=this.getVolume(defaultVolume);
 
         }
 
@@ -65,23 +65,23 @@ export default class AudioManager {
             switch (sound.key) {
 
                 case "menuMusic":
-                    sound.setVolume(this.getVolume(0.35));
+                    sound.volume = this.getVolume(0.35);
                     break;
 
                 case "exteriorMusic":
-                    sound.setVolume(this.getVolume(0.30));
+                    sound.volume = this.getVolume(0.35);
                     break;
 
                 case "classroomMusic":
-                    sound.setVolume(this.getVolume(0.28));
+                    sound.volume = this.getVolume(0.35);
                     break;
 
                 case "puzzleMusic":
-                    sound.setVolume(this.getVolume(0.05));
+                    sound.volume = this.getVolume(0.05);
                     break;
 
                 case "graduationMusic":
-                    sound.setVolume(this.getVolume(0.40));
+                    sound.volume = this.getVolume(0.35);
                     break;
 
             }
