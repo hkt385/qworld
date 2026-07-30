@@ -16,7 +16,7 @@ export default class QuantumGatePuzzle extends Phaser.Scene {
         localStorage.setItem("currentScene", "QuantumGatePuzzle");
 
         const width = this.scale.width;
-        const height = this.scale.height;
+        
 
         this.cameras.main.setBackgroundColor("#12082A");
 

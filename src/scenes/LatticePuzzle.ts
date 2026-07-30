@@ -46,8 +46,7 @@ export default class LatticePuzzle extends Phaser.Scene {
 
     private player!:Phaser.GameObjects.Rectangle;
 
-    private info!:Phaser.GameObjects.Text;
-
+    
     private cursors!:Phaser.Types.Input.Keyboard.CursorKeys;
 
     constructor(){
@@ -62,7 +61,7 @@ export default class LatticePuzzle extends Phaser.Scene {
 
         this.cameras.main.setBackgroundColor("#081421");
 
-        this.info = this.add.text(
+        this.add.text(
 
     640,
     40,
@@ -92,7 +91,7 @@ export default class LatticePuzzle extends Phaser.Scene {
 
         this.children.removeAll();
 
-        this.info = this.add.text(
+        this.add.text(
 
     640,
     55,

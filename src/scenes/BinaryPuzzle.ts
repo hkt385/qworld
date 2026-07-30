@@ -5,7 +5,7 @@ export default class BinaryPuzzle extends Phaser.Scene {
 
     private stage = 1;
     private clicked = 0;
-    private infoText!: Phaser.GameObjects.Text;
+    
 
     constructor() {
         super("BinaryPuzzle");
@@ -39,7 +39,7 @@ export default class BinaryPuzzle extends Phaser.Scene {
             }
         ).setOrigin(0.5);
 
-        this.infoText = this.add.text(
+        this.add.text(
             width / 2,
             100,
             "QBot: Click every ONE-BIT value",
@@ -146,7 +146,7 @@ export default class BinaryPuzzle extends Phaser.Scene {
 
             this.stage++;
 
-            this.infoText = this.add.text(
+            this.add.text(
                 width / 2,
                 100,
                 "QBot: Great! Two bits have FOUR combinations.",
@@ -167,7 +167,7 @@ export default class BinaryPuzzle extends Phaser.Scene {
 
             this.stage++;
 
-            this.infoText = this.add.text(
+            this.add.text(
                 width / 2,
                 100,
                 "QBot: Excellent! Three bits have EIGHT combinations.",

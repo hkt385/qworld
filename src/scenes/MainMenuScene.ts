@@ -3,7 +3,7 @@ import AudioManager from "../utils/AudioManager";
 
 export default class MainMenuScene extends Phaser.Scene {
   private stars: Phaser.GameObjects.Arc[] = [];
-  private menuMusic!: Phaser.Sound.BaseSound;
+  
 
   constructor() {
     super("MainMenuScene");

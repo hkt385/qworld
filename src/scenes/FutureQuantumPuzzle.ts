@@ -28,7 +28,7 @@ export default class FutureQuantumPuzzle extends Phaser.Scene {
 
     private algorithmText!: Phaser.GameObjects.Text;
 
-    private instructionText!: Phaser.GameObjects.Text;
+    
 
     private scoreText!: Phaser.GameObjects.Text;
 
@@ -76,7 +76,7 @@ export default class FutureQuantumPuzzle extends Phaser.Scene {
 
         ).setOrigin(0.5);
 
-        this.instructionText = this.add.text(
+        this.add.text(
 
             640,
             90,

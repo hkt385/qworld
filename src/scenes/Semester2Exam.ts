@@ -270,7 +270,7 @@ localStorage.setItem("currentScene", "Semester2Exam");
         this.cameras.main.setBackgroundColor("#1B103C");
 
         const width = this.scale.width;
-        const height = this.scale.height;
+        
 
         const q = this.questions[this.currentQuestion];
 
