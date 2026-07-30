@@ -34,15 +34,7 @@ export default class SettingsScene extends Phaser.Scene {
     // MUSIC
     // =========================
 
-    const musicLabel = this.add.text(
-        350,
-        190,
-        "Music",
-        {
-            fontSize: "30px",
-            color: "#FFFFFF"
-        }
-    );
+ 
 
     const musicButton = this.add.text(
         820,

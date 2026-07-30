@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 
+
 export default class AudioManager {
 
     static isEnabled(): boolean {
@@ -21,7 +22,7 @@ export default class AudioManager {
 
         if (!this.isEnabled()) return;
 
-        let music = scene.sound.get(key);
+        let music = scene.sound.get(key) as any;
 
         if (!music) {
 
@@ -60,34 +61,22 @@ export default class AudioManager {
 
     static refreshVolumes(scene: Phaser.Scene) {
 
-        scene.sound.getAll().forEach(sound => {
+    const keys = [
+        { key: "menuMusic", volume: 0.35 },
+        { key: "exteriorMusic", volume: 0.35 },
+        { key: "classroomMusic", volume: 0.35 },
+        { key: "puzzleMusic", volume: 0.05 },
+        { key: "graduationMusic", volume: 0.35 }
+    ];
 
-            switch (sound.key) {
+    keys.forEach(({ key, volume }) => {
+        const sound = scene.sound.get(key) as any;
 
-                case "menuMusic":
-                    sound.volume = this.getVolume(0.35);
-                    break;
+        if (sound) {
+            sound.volume = this.getVolume(volume);
+        }
+    });
 
-                case "exteriorMusic":
-                    sound.volume = this.getVolume(0.35);
-                    break;
-
-                case "classroomMusic":
-                    sound.volume = this.getVolume(0.35);
-                    break;
-
-                case "puzzleMusic":
-                    sound.volume = this.getVolume(0.05);
-                    break;
-
-                case "graduationMusic":
-                    sound.volume = this.getVolume(0.35);
-                    break;
-
-            }
-
-        });
-
-    }
+}
 
 }

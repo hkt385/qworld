@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import AudioManager from "../utils/AudioManager";
 
 export default class AcademyExterior extends Phaser.Scene {
-  private academyDoor!: Phaser.Physics.Arcade.StaticImage;
+  
 private enterPrompt!: Phaser.GameObjects.Text;
   private player!: Phaser.Physics.Arcade.Sprite;
   private interactKey!: Phaser.Input.Keyboard.Key;

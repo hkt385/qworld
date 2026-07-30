@@ -2,7 +2,7 @@ import Phaser from "phaser";
 import QuestUI from "../ui/QuestUI";
 import UIScene from "./UIScene";
 import QBot from "../objects/QBot";
-import Journal from "../journal/Journal";
+
 
 export default class AcademyInterior extends Phaser.Scene {
     private selectedSemester = "1";
@@ -13,7 +13,7 @@ export default class AcademyInterior extends Phaser.Scene {
     
 
     private questUI!: QuestUI;
-    private journal!: Journal;
+    
     private talkPrompt!: Phaser.GameObjects.Text;
 
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
@@ -26,7 +26,7 @@ export default class AcademyInterior extends Phaser.Scene {
     };
 
     private interactKey!: Phaser.Input.Keyboard.Key;
-    private journalKey!: Phaser.Input.Keyboard.Key;
+    
 
     constructor() {
         super("AcademyInterior");
@@ -70,9 +70,7 @@ export default class AcademyInterior extends Phaser.Scene {
             Phaser.Input.Keyboard.KeyCodes.T
         );
 
-        this.journalKey = this.input.keyboard!.addKey(
-            Phaser.Input.Keyboard.KeyCodes.J
-        );
+        
 
         this.cursors = this.input.keyboard!.createCursorKeys();
 
@@ -156,7 +154,7 @@ export default class AcademyInterior extends Phaser.Scene {
         this.questUI = new QuestUI(this);
         this.questUI.setQuest("Talk to Professor Qubit");
 
-        this.journal = new Journal(this);
+        
 
         this.talkPrompt = this.add.text(
             0,
