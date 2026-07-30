@@ -70,7 +70,7 @@ AudioManager.play(this, "puzzleMusic", 0.05);
             .setStrokeStyle(2, 0xffffff)
             .setInteractive({ useHandCursor: true });
 
-            const text = this.add.text(width / 2, y, option, {
+            this.add.text(width / 2, y, option, {
     fontSize: "22px",
     color: "#FFFFFF",
     align: "center",
@@ -78,6 +78,7 @@ AudioManager.play(this, "puzzleMusic", 0.05);
         width: 440
     }
 })
+
 .setOrigin(0.5);
 
             button.on("pointerover", () => {

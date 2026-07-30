@@ -19,7 +19,7 @@ export default class MeasurementPuzzle extends Phaser.Scene {
         localStorage.setItem("currentScene", "MeasurementPuzzle");
 
         const width = this.scale.width;
-        const height = this.scale.height;
+        
 
         this.cameras.main.setBackgroundColor("#12082A");
 

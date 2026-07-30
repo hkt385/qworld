@@ -26,7 +26,7 @@ export default class QuantumCircuitPuzzle extends Phaser.Scene {
         localStorage.setItem("currentScene", "QuantumCircuitPuzzle");
 
         const width = this.scale.width;
-        const height = this.scale.height;
+        
 
         this.cameras.main.setBackgroundColor("#1B1035");
 

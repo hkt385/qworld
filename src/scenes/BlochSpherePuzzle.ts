@@ -19,7 +19,7 @@ export default class BlochSpherePuzzle extends Phaser.Scene {
         this.cameras.main.setBackgroundColor("#12082A");
 
         const w = this.scale.width;
-        const h = this.scale.height;
+        
 
         this.add.text(
             w / 2,

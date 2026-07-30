@@ -11,7 +11,7 @@ export default class CreditsScene extends Phaser.Scene {
         localStorage.setItem("currentScene", "CreditsScene");
 
         const width = this.scale.width;
-        const height = this.scale.height;
+        
 
         this.cameras.main.setBackgroundColor("#12082A");
 
@@ -106,7 +106,7 @@ export default class CreditsScene extends Phaser.Scene {
         .setInteractive({ useHandCursor: true })
         .setStrokeStyle(2, 0xFFFFFF);
 
-        const buttonText = this.add.text(
+        this.add.text(
             width / 2,
             610,
             "Main Menu",
