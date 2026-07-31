@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import AudioManager from "../utils/AudioManager";
-import MobileDPad from "../ui/MobileDPad";
+
 
 export default class AcademyExterior extends Phaser.Scene {
   
