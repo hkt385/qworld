@@ -14,7 +14,7 @@ export default class MobileDPad {
         this.scene = scene;
 
         // Only show on touch devices
-        if (!scene.sys.game.device.input.touch) return;
+        //if (!scene.sys.game.device.input.touch) return;
 
         
         const height = scene.scale.height;
