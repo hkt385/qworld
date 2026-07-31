@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import QuestUI from "../ui/QuestUI";
+
 import UIScene from "./UIScene";
 import QBot from "../objects/QBot";
 
@@ -12,7 +12,7 @@ export default class AcademyInterior extends Phaser.Scene {
     private qbot!: QBot;
     
 
-    private questUI!: QuestUI;
+    
     
     private talkPrompt!: Phaser.GameObjects.Text;
 
@@ -151,9 +151,7 @@ export default class AcademyInterior extends Phaser.Scene {
         this.cameras.main.setZoom(2);
         this.cameras.main.startFollow(this.player);
 
-        this.questUI = new QuestUI(this);
-        this.questUI.setQuest("Talk to Professor Qubit");
-
+        
         
 
         this.talkPrompt = this.add.text(
@@ -203,7 +201,7 @@ export default class AcademyInterior extends Phaser.Scene {
         // Open / Close Journal
         if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
 
-    this.questUI.completeQuest("Talk to Professor Qubit");
+    
 
     if (this.selectedSemester === "1") {
 
@@ -284,7 +282,6 @@ export default class AcademyInterior extends Phaser.Scene {
 
             if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
 
-    this.questUI.completeQuest("Talk to Professor Qubit");
 
     if (this.selectedSemester === "1") {
 

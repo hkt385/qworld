@@ -16,7 +16,7 @@ export default class MobileDPad {
         // Only show on touch devices
         if (!scene.sys.game.device.input.touch) return;
 
-        const width = scene.scale.width;
+        
         const height = scene.scale.height;
 
         this.createButton("◀", 70, height - 90, "left");
