@@ -13,16 +13,16 @@ export default class MobileDPad {
 
         this.scene = scene;
 
-        // Only show on touch devices
-        //if (!scene.sys.game.device.input.touch) return;
+        const width = scene.cameras.main.width;
+        const height = scene.cameras.main.height;
 
-        
-        const height = scene.scale.height;
+        const centerX = 110;
+        const centerY = height - 110;
 
-        this.createButton("◀", 70, height - 90, "left");
-        this.createButton("▶", 170, height - 90, "right");
-        this.createButton("▲", 120, height - 140, "up");
-        this.createButton("▼", 120, height - 40, "down");
+        this.createButton("◀", centerX - 60, centerY, "left");
+        this.createButton("▶", centerX + 60, centerY, "right");
+        this.createButton("▲", centerX, centerY - 60, "up");
+        this.createButton("▼", centerX, centerY + 60, "down");
     }
 
     private createButton(
@@ -32,29 +32,49 @@ export default class MobileDPad {
         direction: "left" | "right" | "up" | "down"
     ) {
 
-        const button = this.scene.add.circle(x, y, 35, 0x000000, 0.35)
-            .setScrollFactor(0)
-            .setDepth(9999)
-            .setInteractive();
+        const button = this.scene.add.circle(
+            x,
+            y,
+            45,
+            0x000000,
+            0.45
+        );
 
-        this.scene.add.text(x, y, label, {
-            fontSize: "26px",
-            color: "#ffffff"
-        })
+        button
+            .setScrollFactor(0)
+            .setDepth(100000)
+            .setInteractive({ useHandCursor: false });
+
+        const text = this.scene.add.text(
+            x,
+            y,
+            label,
+            {
+                fontSize: "30px",
+                color: "#ffffff",
+                fontStyle: "bold"
+            }
+        );
+
+        text
             .setOrigin(0.5)
             .setScrollFactor(0)
-            .setDepth(10000);
+            .setDepth(100001);
 
-        button.on("pointerdown", () => {
+        const press = () => {
             this[direction] = true;
-        });
+        };
 
-        button.on("pointerup", () => {
-            this[direction] = false;
-        });
+        const release = () => {
+            this.left = false;
+            this.right = false;
+            this.up = false;
+            this.down = false;
+        };
 
-        button.on("pointerout", () => {
-            this[direction] = false;
-        });
+        button.on("pointerdown", press);
+        button.on("pointerup", release);
+        button.on("pointerout", release);
+        button.on("pointerupoutside", release);
     }
 }
