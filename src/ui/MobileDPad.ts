@@ -13,7 +13,7 @@ export default class MobileDPad {
 
         this.scene = scene;
 
-        const width = scene.cameras.main.width;
+        
         const height = scene.cameras.main.height;
 
         const centerX = 110;
