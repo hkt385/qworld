@@ -7,7 +7,9 @@ export default class AcademyExterior extends Phaser.Scene {
 private enterPrompt!: Phaser.GameObjects.Text;
   private player!: Phaser.Physics.Arcade.Sprite;
   private interactKey!: Phaser.Input.Keyboard.Key;
-  private dpad!: MobileDPad;
+  
+  private targetX: number | null = null;
+private targetY: number | null = null;
 
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
 
@@ -53,7 +55,13 @@ this.load.spritesheet(
 
   create() {
     // E key
-    this.dpad = new MobileDPad(this);
+    this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+
+    this.targetX = pointer.worldX;
+    this.targetY = pointer.worldY;
+
+});
+    
     AudioManager.play(this, "exteriorMusic", 0.30);
     
 
@@ -171,23 +179,55 @@ this.enterPrompt
     update() {
     const speed = 180;
 
-    let vx = 0;
-    let vy = 0;
+let vx = 0;
+let vy = 0;
 
-    // Horizontal movement
-    if (this.keys.A.isDown || this.cursors.left.isDown || this.dpad.left) {
-      vx = -speed;
-    } else if (this.keys.D.isDown || this.cursors.right.isDown || this.dpad.right) {
-      vx = speed;
+// Keyboard movement
+if (this.keys.A.isDown || this.cursors.left.isDown) {
+    vx = -speed;
+    this.targetX = null;
+    this.targetY = null;
+}
+else if (this.keys.D.isDown || this.cursors.right.isDown) {
+    vx = speed;
+    this.targetX = null;
+    this.targetY = null;
+}
+
+if (this.keys.W.isDown || this.cursors.up.isDown) {
+    vy = -speed;
+    this.targetX = null;
+    this.targetY = null;
+}
+else if (this.keys.S.isDown || this.cursors.down.isDown) {
+    vy = speed;
+    this.targetX = null;
+    this.targetY = null;
+}
+
+// Tap-to-move
+if (this.targetX !== null && this.targetY !== null) {
+
+    const dx = this.targetX - this.player.x;
+    const dy = this.targetY - this.player.y;
+
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance > 5) {
+
+        vx = (dx / distance) * speed;
+        vy = (dy / distance) * speed;
+
+    } else {
+
+        this.targetX = null;
+        this.targetY = null;
+
     }
 
-    // Vertical movement
-   if (this.keys.W.isDown || this.cursors.up.isDown || this.dpad.up) {
-    vy = -speed;
-} else if (this.keys.S.isDown || this.cursors.down.isDown || this.dpad.down) {
-    vy = speed;
 }
-    this.player.setVelocity(vx, vy);
+
+this.player.setVelocity(vx, vy);
 
     const body = this.player.body as Phaser.Physics.Arcade.Body;
 
