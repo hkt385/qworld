@@ -136,16 +136,15 @@ this.player.setCollideWorldBounds(true);
     }
 
     this.cameras.main.startFollow(this.player);
-    
-    // Enter Prompt
-this.enterPrompt = this.add.text(
-    60,
-    60,
-    "📱 Drag your finger or use arrow keys to move",
+    this.enterPrompt = this.add.text(
+    this.player.x,
+    this.player.y - 50,
+    "📱 Drag your finger to move\n⌨️ Or use WASD / Arrow Keys",
     {
-        fontSize: "16px",
+        fontSize: "14px",
         color: "#ffffff",
         backgroundColor: "#000000",
+        align: "center",
         padding: {
             x: 8,
             y: 5
@@ -154,9 +153,27 @@ this.enterPrompt = this.add.text(
 );
 
 this.enterPrompt
-    .setScrollFactor(0)
+    .setOrigin(0.5)
     .setDepth(1000);
+    this.time.delayedCall(5000, () => {
 
+    this.tweens.add({
+
+        targets: this.enterPrompt,
+
+        alpha: 0,
+
+        duration: 1000,
+
+        onComplete: () => {
+
+            this.enterPrompt.destroy();
+
+        }
+
+    });
+
+});
 
     
 
@@ -217,6 +234,14 @@ this.doorPrompt
   }
     update() {
     const speed = 180;
+    if (this.enterPrompt) {
+
+    this.enterPrompt.setPosition(
+        this.player.x,
+        this.player.y - 50
+    );
+
+}
 
 let vx = 0;
 let vy = 0;
