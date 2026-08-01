@@ -307,7 +307,8 @@ const distance = Phaser.Math.Distance.Between(
 if (distance < 500) {
 
   this.doorPrompt
-        .setPosition(408, 186)
+        .setPosition(this.player.x,
+    this.player.y - 60)
         .setText("Drag your finger to move\nor use Arrow keys/WASD\nWalk to the door to enter")
         .setVisible(true);
 

@@ -1,20 +1,28 @@
 import Phaser from "phaser";
-
+import QuestUI from "../ui/QuestUI";
 import UIScene from "./UIScene";
 import QBot from "../objects/QBot";
 
 
 export default class AcademyInterior extends Phaser.Scene {
     private selectedSemester = "1";
+    
 
     private player!: Phaser.Physics.Arcade.Sprite;
     private professor!: Phaser.Physics.Arcade.Sprite;
     private qbot!: QBot;
     
 
-    
+    private questUI!: QuestUI;
     
     private talkPrompt!: Phaser.GameObjects.Text;
+    private touchStartX = 0;
+private touchStartY = 0;
+
+private touchCurrentX = 0;
+private touchCurrentY = 0;
+
+private isTouching = false;
 
     private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
 
@@ -151,7 +159,9 @@ export default class AcademyInterior extends Phaser.Scene {
         this.cameras.main.setZoom(2);
         this.cameras.main.startFollow(this.player);
 
-        
+        this.questUI = new QuestUI(this);
+        this.questUI.setQuest("Talk to Professor Qubit");
+
         
 
         this.talkPrompt = this.add.text(
@@ -170,6 +180,26 @@ export default class AcademyInterior extends Phaser.Scene {
             .setOrigin(0.5)
             .setDepth(500)
             .setVisible(false);
+            this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+    this.isTouching = true;
+
+    this.touchStartX = pointer.x;
+    this.touchStartY = pointer.y;
+
+    this.touchCurrentX = pointer.x;
+    this.touchCurrentY = pointer.y;
+});
+
+this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+    if (this.isTouching) {
+        this.touchCurrentX = pointer.x;
+        this.touchCurrentY = pointer.y;
+    }
+});
+
+this.input.on("pointerup", () => {
+    this.isTouching = false;
+});
     }
     private waitForContinue(nextScene: string) {
 
@@ -201,7 +231,7 @@ export default class AcademyInterior extends Phaser.Scene {
         // Open / Close Journal
         if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
 
-    
+    this.questUI.completeQuest("Talk to Professor Qubit");
 
     if (this.selectedSemester === "1") {
 
@@ -254,6 +284,33 @@ export default class AcademyInterior extends Phaser.Scene {
         } else if (this.keys.S.isDown || this.cursors.down.isDown) {
             vy = speed;
         }
+        // Touch Drag Movement
+if (this.isTouching) {
+
+    const dx = Phaser.Math.Clamp(
+        this.touchCurrentX - this.touchStartX,
+        -80,
+        80
+    );
+
+    const dy = Phaser.Math.Clamp(
+        this.touchCurrentY - this.touchStartY,
+        -80,
+        80
+    );
+
+    const deadZone = 15;
+
+    if (Math.abs(dx) > deadZone || Math.abs(dy) > deadZone) {
+
+        const length = Math.sqrt(dx * dx + dy * dy);
+
+        vx = (dx / length) * speed;
+        vy = (dy / length) * speed;
+
+    }
+
+}
 
         this.player.setVelocity(vx, vy);
 
@@ -282,6 +339,7 @@ export default class AcademyInterior extends Phaser.Scene {
 
             if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
 
+    this.questUI.completeQuest("Talk to Professor Qubit");
 
     if (this.selectedSemester === "1") {
 
