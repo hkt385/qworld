@@ -60,45 +60,7 @@ this.load.spritesheet(
 
   create() {
     // E key
-    this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
-    this.isTouching = true;
-
-    this.touchStartX = pointer.x;
-    this.touchStartY = pointer.y;
-
-    this.touchCurrentX = pointer.x;
-    this.touchCurrentY = pointer.y;
-});
-this.doorPrompt = this.add.text(
-    408,
-    186,
-    "🚪 Walk to the door to enter",
-    {
-        fontSize: "14px",
-        color: "#ffffff",
-        backgroundColor: "#000000",
-        padding: {
-            x: 6,
-            y: 3
-        }
-    }
-);
-
-this.doorPrompt
-    .setOrigin(0.5)
-    .setDepth(500)
-    .setVisible(false);
-
-this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
-    if (this.isTouching) {
-        this.touchCurrentX = pointer.x;
-        this.touchCurrentY = pointer.y;
-    }
-});
-
-this.input.on("pointerup", () => {
-    this.isTouching = false;
-});
+    
     
     AudioManager.play(this, "exteriorMusic", 0.30);
     
@@ -174,10 +136,7 @@ this.player.setCollideWorldBounds(true);
     }
 
     this.cameras.main.startFollow(this.player);
-    this.enterPrompt.setPosition(20, 20);
-this.enterPrompt.setScrollFactor(0);
-this.enterPrompt.setDepth(1000);
-this.enterPrompt.setVisible(true);
+    
     // Enter Prompt
 this.enterPrompt = this.add.text(
     60,
@@ -215,6 +174,46 @@ this.enterPrompt
       S: Phaser.Input.Keyboard.Key;
       D: Phaser.Input.Keyboard.Key;
     };
+    this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+    this.isTouching = true;
+
+    this.touchStartX = pointer.x;
+    this.touchStartY = pointer.y;
+
+    this.touchCurrentX = pointer.x;
+    this.touchCurrentY = pointer.y;
+});
+
+
+this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+    if (this.isTouching) {
+        this.touchCurrentX = pointer.x;
+        this.touchCurrentY = pointer.y;
+    }
+});
+
+this.input.on("pointerup", () => {
+    this.isTouching = false;
+});
+this.doorPrompt = this.add.text(
+    408,
+    186,
+    "🚪 Walk to the door to enter",
+    {
+        fontSize: "14px",
+        color: "#ffffff",
+        backgroundColor: "#000000",
+        padding: {
+            x: 6,
+            y: 3
+        }
+    }
+);
+
+this.doorPrompt
+    .setOrigin(0.5)
+    .setDepth(500)
+    .setVisible(false);
   }
     update() {
     const speed = 180;
