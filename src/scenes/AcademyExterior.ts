@@ -176,8 +176,8 @@ this.player.setCollideWorldBounds(true);
     this.cameras.main.startFollow(this.player);
     // Enter Prompt
 this.enterPrompt = this.add.text(
-    10,
-    10,
+    20,
+    20,
     "📱 Drag your finger or use arrow keys to move",
     {
         fontSize: "16px",
@@ -194,10 +194,7 @@ this.enterPrompt
     .setScrollFactor(0)
     .setDepth(1000);
 
-this.enterPrompt
-    .setOrigin(0.5)
-    .setDepth(500)
-    .setVisible(false);
+
     
 
     // Input
