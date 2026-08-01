@@ -137,8 +137,8 @@ this.player.setCollideWorldBounds(true);
 
     this.cameras.main.startFollow(this.player);
     this.enterPrompt = this.add.text(
-    this.player.x,
-    this.player.y - 50,
+    80,
+    40,
     "📱 Drag your finger to move\n⌨️ Or use WASD / Arrow Keys",
     {
         fontSize: "14px",
@@ -154,6 +154,7 @@ this.player.setCollideWorldBounds(true);
 
 this.enterPrompt
     .setOrigin(0.5)
+    .setScrollFactor(0)
     .setDepth(1000);
     this.time.delayedCall(5000, () => {
 
@@ -234,14 +235,7 @@ this.doorPrompt
   }
     update() {
     const speed = 180;
-    if (this.enterPrompt) {
-
-    this.enterPrompt.setPosition(
-        this.player.x,
-        this.player.y - 50
-    );
-
-}
+    
 
 let vx = 0;
 let vy = 0;
