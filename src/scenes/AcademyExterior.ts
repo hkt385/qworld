@@ -6,10 +6,15 @@ export default class AcademyExterior extends Phaser.Scene {
   
 private enterPrompt!: Phaser.GameObjects.Text;
   private player!: Phaser.Physics.Arcade.Sprite;
-  private interactKey!: Phaser.Input.Keyboard.Key;
-  
-  private targetX: number | null = null;
-private targetY: number | null = null;
+  private doorPrompt!: Phaser.GameObjects.Text;
+  private enteringDoor = false;
+  private touchStartX = 0;
+private touchStartY = 0;
+
+private touchCurrentX = 0;
+private touchCurrentY = 0;
+
+private isTouching = false;
 
   private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
 
@@ -56,10 +61,43 @@ this.load.spritesheet(
   create() {
     // E key
     this.input.on("pointerdown", (pointer: Phaser.Input.Pointer) => {
+    this.isTouching = true;
 
-    this.targetX = pointer.worldX;
-    this.targetY = pointer.worldY;
+    this.touchStartX = pointer.x;
+    this.touchStartY = pointer.y;
 
+    this.touchCurrentX = pointer.x;
+    this.touchCurrentY = pointer.y;
+});
+this.doorPrompt = this.add.text(
+    408,
+    186,
+    "🚪 Walk to the door to enter",
+    {
+        fontSize: "14px",
+        color: "#ffffff",
+        backgroundColor: "#000000",
+        padding: {
+            x: 6,
+            y: 3
+        }
+    }
+);
+
+this.doorPrompt
+    .setOrigin(0.5)
+    .setDepth(500)
+    .setVisible(false);
+
+this.input.on("pointermove", (pointer: Phaser.Input.Pointer) => {
+    if (this.isTouching) {
+        this.touchCurrentX = pointer.x;
+        this.touchCurrentY = pointer.y;
+    }
+});
+
+this.input.on("pointerup", () => {
+    this.isTouching = false;
 });
     
     AudioManager.play(this, "exteriorMusic", 0.30);
@@ -68,9 +106,6 @@ this.load.spritesheet(
     localStorage.setItem("currentScene", "AcademyExterior");
 
     
-    this.interactKey = this.input.keyboard!.addKey(
-      Phaser.Input.Keyboard.KeyCodes.E
-    );
     
 
     // Map
@@ -141,19 +176,23 @@ this.player.setCollideWorldBounds(true);
     this.cameras.main.startFollow(this.player);
     // Enter Prompt
 this.enterPrompt = this.add.text(
-    408,
-    186,
-    "Press E to Enter",
+    10,
+    10,
+    "📱 Drag your finger or use arrow keys to move",
     {
-        fontSize: "14px",
+        fontSize: "16px",
         color: "#ffffff",
         backgroundColor: "#000000",
         padding: {
-            x: 6,
-            y: 3
+            x: 8,
+            y: 5
         }
     }
 );
+
+this.enterPrompt
+    .setScrollFactor(0)
+    .setDepth(1000);
 
 this.enterPrompt
     .setOrigin(0.5)
@@ -185,46 +224,45 @@ let vy = 0;
 // Keyboard movement
 if (this.keys.A.isDown || this.cursors.left.isDown) {
     vx = -speed;
-    this.targetX = null;
-    this.targetY = null;
+    
 }
 else if (this.keys.D.isDown || this.cursors.right.isDown) {
     vx = speed;
-    this.targetX = null;
-    this.targetY = null;
+    
 }
-
 if (this.keys.W.isDown || this.cursors.up.isDown) {
     vy = -speed;
-    this.targetX = null;
-    this.targetY = null;
+    
 }
 else if (this.keys.S.isDown || this.cursors.down.isDown) {
     vy = speed;
-    this.targetX = null;
-    this.targetY = null;
+    
 }
 
-// Tap-to-move
-if (this.targetX !== null && this.targetY !== null) {
+// Touch & Drag movement
+if (this.isTouching) {
 
-    const dx = this.targetX - this.player.x;
-    const dy = this.targetY - this.player.y;
+    const dx = Phaser.Math.Clamp(
+    this.touchCurrentX - this.touchStartX,
+    -80,
+    80
+);
 
-    const distance = Math.sqrt(dx * dx + dy * dy);
+const dy = Phaser.Math.Clamp(
+    this.touchCurrentY - this.touchStartY,
+    -80,
+    80
+);
 
-    if (distance > 5) {
+    const deadZone = 15;
 
-        vx = (dx / distance) * speed;
-        vy = (dy / distance) * speed;
+    if (Math.abs(dx) > deadZone || Math.abs(dy) > deadZone) {
 
-    } else {
+        const length = Math.sqrt(dx * dx + dy * dy);
 
-        this.targetX = null;
-        this.targetY = null;
-
+        vx = (dx / length) * speed;
+        vy = (dy / length) * speed;
     }
-
 }
 
 this.player.setVelocity(vx, vy);
@@ -246,26 +284,39 @@ const distance = Phaser.Math.Distance.Between(
     216
 );
 
-if (distance < 40) {
+// Show prompt when nearby
+if (distance < 180) {
 
-    this.enterPrompt
-    .setPosition(408, 186)
-    .setVisible(true);
-
-    if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
-
-        AudioManager.stop(this, "exteriorMusic");
-        this.scene.start("AcademyInterior");
-
-    }
+  this.doorPrompt
+        .setPosition(408, 186)
+        .setText("Walk to the door to enter")
+        .setVisible(true);
 
 } else {
 
-    this.enterPrompt.setVisible(false);
+    this.doorPrompt.setVisible(false);
+
+}
+
+// Enter automatically when very close
+if (distance < 25 && !this.enteringDoor) {
+
+    this.enteringDoor = true;
+
+    AudioManager.stop(this, "exteriorMusic");
+
+    this.cameras.main.fadeOut(300, 0, 0, 0);
+
+    this.cameras.main.once(
+        Phaser.Cameras.Scene2D.Events.FADE_OUT_COMPLETE,
+        () => {
+            this.scene.start("AcademyInterior");
+        }
+    );
 
 }
 
     
     }
   
-}
+  }
