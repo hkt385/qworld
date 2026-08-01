@@ -304,11 +304,11 @@ const distance = Phaser.Math.Distance.Between(
 );
 
 // Show prompt when nearby
-if (distance < 180) {
+if (distance < 500) {
 
   this.doorPrompt
         .setPosition(408, 186)
-        .setText("Walk to the door to enter")
+        .setText("Drag your finger to move\nor use Arrow keys/WASD\nWalk to the door to enter")
         .setVisible(true);
 
 } else {
