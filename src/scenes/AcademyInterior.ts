@@ -336,8 +336,21 @@ if (this.isTouching) {
                 this.professor.x,
                 this.professor.y - 35
             );
+   const pointer = this.input.activePointer;
 
-            if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
+const tappedProfessor =
+    pointer.isDown &&
+    Phaser.Math.Distance.Between(
+        pointer.worldX,
+        pointer.worldY,
+        this.professor.x,
+        this.professor.y
+    ) < 40;
+
+            if (
+    Phaser.Input.Keyboard.JustDown(this.interactKey) ||
+    tappedProfessor
+) {
 
     this.questUI.completeQuest("Talk to Professor Qubit");
 
