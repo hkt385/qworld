@@ -6,117 +6,108 @@ export default class Quiz13 extends BaseQuiz {
 
     protected nextScene = "Lesson13Complete";
 
-    protected questions= [
+    protected questions = [
 
 {
-    question: "What is the main goal of Post-Quantum Cryptography?",
+    question: "Which two public-key cryptographic systems are widely used on today's internet?",
     options: [
-        "Use quantum computers for encryption",
-        "Create cryptographic algorithms resistant to quantum attacks",
-        "Replace the internet",
-        "Increase internet speed"
-    ],
-    answer: 1
-},
-
-{
-    question: "Which widely used algorithm is threatened by Shor's Algorithm?",
-    options: [
-        "RSA",
-        "AES-256",
-        "SHA-256",
-        "ChaCha20"
+        "RSA and ECC",
+        "AES and SHA-3",
+        "DES and 3DES",
+        "ML-KEM and ML-DSA"
     ],
     answer: 0
 },
 
 {
-    question: "RSA is primarily based on the difficulty of:",
+    question: "RSA is considered secure because it is difficult to...",
     options: [
-        "Sorting numbers",
-        "Prime factorization",
-        "Searching databases",
-        "Hashing passwords"
-    ],
-    answer: 1
-},
-
-{
-    question: "ECC stands for:",
-    options: [
-        "Efficient Computer Code",
-        "Elliptic Curve Cryptography",
-        "Encrypted Cloud Computing",
-        "Electronic Cipher Code"
-    ],
-    answer: 1
-},
-
-{
-    question: "Which quantum algorithm threatens RSA and ECC?",
-    options: [
-        "Grover's Algorithm",
-        "Deutsch's Algorithm",
-        "Shor's Algorithm",
-        "Simon's Algorithm"
-    ],
-    answer: 2
-},
-
-{
-    question: "What does 'Harvest Now, Decrypt Later' mean?",
-    options: [
-        "Delete encrypted files",
-        "Store encrypted data today and decrypt it when quantum computers become available",
-        "Backup data every day",
+        "Multiply two prime numbers",
+        "Factor a very large number into its original prime numbers",
+        "Generate random passwords",
         "Compress encrypted files"
     ],
     answer: 1
 },
 
 {
-    question: "Which of the following is considered quantum-resistant today?",
+    question: "ECC is based on which mathematical problem?",
     options: [
-        "RSA",
-        "ECC",
-        "ML-KEM",
-        "DSA"
+        "Prime Factorization",
+        "Shortest Vector Problem",
+        "Elliptic Curve Discrete Logarithm Problem",
+        "Learning With Errors"
     ],
     answer: 2
 },
 
 {
-    question: "What does ML-KEM primarily provide?",
+    question: "Which quantum algorithm could eventually break RSA and ECC?",
     options: [
-        "Password storage",
-        "Key establishment",
-        "Data compression",
-        "Database indexing"
+        "Grover's Algorithm",
+        "Shor's Algorithm",
+        "Deutsch's Algorithm",
+        "Bernstein-Vazirani Algorithm"
     ],
     answer: 1
 },
 
 {
-    question: "Why is the world transitioning to Post-Quantum Cryptography now?",
+    question: "What does 'Harvest Now, Decrypt Later' mean?",
     options: [
-        "Quantum computers are already breaking everything",
-        "To prepare before large-scale quantum computers become practical",
-        "To replace classical computers",
-        "To eliminate passwords"
+        "Delete encrypted files after downloading",
+        "Steal encrypted data today and decrypt it in the future using powerful quantum computers",
+        "Store passwords for later use",
+        "Back up encrypted files every day"
     ],
     answer: 1
 },
 
 {
-    question: "Which statement best describes Post-Quantum Cryptography?",
+    question: "Why are researchers preparing new cryptographic algorithms today?",
     options: [
-        "It requires a quantum computer to work",
-        "It uses photons for encryption",
-        "It runs on classical computers but resists quantum attacks",
-        "It replaces the internet"
+        "Because quantum computers already broke all encryption",
+        "Because classical computers no longer work",
+        "To protect information before large quantum computers become available",
+        "To replace the internet"
     ],
     answer: 2
-}
+},
+
+{
+    question: "What is the worldwide transition to new quantum-resistant cryptography called?",
+    options: [
+        "Quantum Networking",
+        "Post-Quantum Cryptography",
+        "Quantum Teleportation",
+        "Quantum Hardware Migration"
+    ],
+    answer: 1
+},
+
+{
+    question: "According to the lesson, what protects RSA today?",
+    options: [
+        "Keeping the algorithm secret",
+        "The difficulty of solving certain mathematical problems",
+        "Fast internet connections",
+        "Quantum computers"
+    ],
+    answer: 1
+},
+
+{
+    question: "Why have RSA and ECC been trusted for decades?",
+    options: [
+        "Classical computers take an enormous amount of time to solve their underlying mathematical problems",
+        "They use quantum physics",
+        "They cannot be attacked",
+        "They require special hardware"
+    ],
+    answer: 0
+},
+
+
 
 ];
     constructor() {

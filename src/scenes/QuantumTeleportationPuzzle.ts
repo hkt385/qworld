@@ -33,7 +33,7 @@ private networkStatus!: Phaser.GameObjects.Text;
     50,
     "🌐 Quantum Communication Network",
     {
-        fontSize: "38px",
+        fontSize: "28px",
         color: "#FFD700",
         fontStyle: "bold"
     }
@@ -44,11 +44,11 @@ private networkStatus!: Phaser.GameObjects.Text;
     110,
     "Step 1\nCreate a Quantum Link",
     {
-        fontSize: "22px",
+        fontSize: "18px",
         color: "#FFFFFF",
         align: "center",
         wordWrap: {
-            width: 700
+            width: 500
         }
     }
 ).setOrigin(0.5);
@@ -56,8 +56,8 @@ private networkStatus!: Phaser.GameObjects.Text;
         this.aliceBox = this.add.rectangle(
     260,
     320,
-    220,
-    160,
+    180,
+    120,
     0x253B80
 )
 .setStrokeStyle(4,0x66CCFF);
@@ -67,7 +67,7 @@ this.add.text(
     270,
     "💻 Alice",
     {
-        fontSize:"28px",
+        fontSize:"22px",
         color:"#FFFFFF"
     }
 ).setOrigin(0.5);
@@ -77,7 +77,7 @@ this.alice = this.add.text(
     335,
     "|ψ⟩",
     {
-        fontSize:"42px",
+        fontSize:"32px",
         color:"#00FFFF"
     }
 ).setOrigin(0.5);
@@ -137,14 +137,14 @@ this.add.text(
     285,
     "🔴 Offline",
     {
-        fontSize:"26px",
+        fontSize:"20px",
         color:"#FF5555"
     }
 ).setOrigin(0.5);
         // Entangle Button
         this.createButton(
             150,
-            620,
+            560,
             "Entangle",
             () => this.entangle()
         );
@@ -152,7 +152,7 @@ this.add.text(
         // Measure Button
         this.createButton(
             390,
-            620,
+            560,
             "Measure",
             () => this.measure()
         );
@@ -160,7 +160,7 @@ this.add.text(
         // Send Bits Button
         this.createButton(
             630,
-            620,
+            560,
             "Send Bits",
             () => this.sendBits()
         );
@@ -168,7 +168,7 @@ this.add.text(
         // Identity
         this.createButton(
             870,
-            620,
+            560,
             "Identity",
             () => this.checkGate("I")
         );
@@ -176,7 +176,7 @@ this.add.text(
         // X Gate
         this.createButton(
             1110,
-            620,
+            560,
             "X Gate",
             () => this.checkGate("X")
         );
@@ -184,7 +184,7 @@ this.add.text(
         // Z Gate
         this.createButton(
             870,
-            700,
+            560,
             "Z Gate",
             () => this.checkGate("Z")
         );
@@ -192,7 +192,7 @@ this.add.text(
         // X + Z
         this.createButton(
             1110,
-            700,
+            560,
             "X + Z",
             () => this.checkGate("XZ")
         );
@@ -209,8 +209,8 @@ this.add.text(
         const btn = this.add.rectangle(
             x,
             y,
-            180,
-            60,
+            140,
+            50,
             0x6A0DAD
         )
         .setStrokeStyle(2, 0xffffff)
@@ -223,7 +223,7 @@ this.add.text(
             y,
             label,
             {
-                fontSize: "22px",
+                fontSize: "18px",
                 color: "#FFFFFF"
             }
         ).setOrigin(0.5);
@@ -470,7 +470,8 @@ Try again!`
     );
 
     this.info.setText(
-`🎉 Quantum Teleportation Successful!
+`
+🎉 Quantum Teleportation Successful!
 
 Bob now has Alice's original quantum state.
 
