@@ -59,29 +59,35 @@ localStorage.setItem("currentScene", "Semester1Complete");
 
         }
 
-        this.add.text(
-            width / 2,
-            640,
-            "Press SPACE to unlock Semester 2",
-            {
-                fontSize: "24px",
-                color: "#FFD700"
-            }
-        ).setOrigin(0.5);
+    const btn = this.add.rectangle(
+    width / 2,
+    650,
+    450,
+    70,
+    0x6A0DAD
+)
+.setInteractive({ useHandCursor: true })
+.setStrokeStyle(2, 0xffffff);
 
-        this.input.keyboard!.once("keydown-SPACE", () => {
+this.add.text(
+    width / 2,
+    650,
+    "Start Semester 2",
+    {
+        fontSize: "28px",
+        color: "#FFFFFF"
+    }
+).setOrigin(0.5);
 
-            // Unlock Semester 2
-            localStorage.setItem("semester2", "true");
+btn.on("pointerdown", () => {
 
-            
+    localStorage.setItem("semester2", "true");
+    localStorage.setItem("semester2Unlocked", "true");
+    localStorage.setItem("selectedSemester", "2");
 
-            // Return to Academy
-            localStorage.setItem("semester2Unlocked", "true");
-            localStorage.setItem("selectedSemester", "2");
-            this.scene.start("AcademyInterior");
+    this.scene.start("AcademyInterior");
 
-        });
+});
 
     }
 
