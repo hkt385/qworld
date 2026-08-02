@@ -23,6 +23,8 @@ export default class FutureQuantumPuzzle extends Phaser.Scene {
         { name: "SHA-3", safe: true }
 
     ];
+    private blockButton!: Phaser.GameObjects.Rectangle;
+private allowButton!: Phaser.GameObjects.Rectangle;
 
     private current!: Algorithm;
 
@@ -81,7 +83,7 @@ export default class FutureQuantumPuzzle extends Phaser.Scene {
             640,
             90,
 
-            "← BLOCK      |      ALLOW →",
+            "⬅ Tap BLOCK or ALLOW ➡",
 
             {
 
@@ -162,8 +164,70 @@ export default class FutureQuantumPuzzle extends Phaser.Scene {
             }
 
         ).setOrigin(0.5);
+        // BLOCK button
+this.blockButton = this.add.rectangle(
+    250,
+    640,
+    220,
+    80,
+    0xCC3333
+)
+.setInteractive({ useHandCursor: true });
+
+this.add.text(
+    250,
+    640,
+    "⬅ BLOCK",
+    {
+        fontSize: "28px",
+        color: "#FFFFFF"
+    }
+).setOrigin(0.5);
+
+// ALLOW button
+this.allowButton = this.add.rectangle(
+    1030,
+    640,
+    220,
+    80,
+    0x2E8B57
+)
+.setInteractive({ useHandCursor: true });
+
+this.add.text(
+    1030,
+    640,
+    "ALLOW ➡",
+    {
+        fontSize: "28px",
+        color: "#FFFFFF"
+    }
+).setOrigin(0.5);
+
+this.blockButton.on("pointerdown", () => {
+
+    if (!this.processing) {
+
+        this.processing = true;
+        this.checkAnswer(false);
+
+    }
+
+});
+
+this.allowButton.on("pointerdown", () => {
+
+    if (!this.processing) {
+
+        this.processing = true;
+        this.checkAnswer(true);
+
+    }
+
+});
 
         this.spawnAlgorithm();
+        
 
     }
 
