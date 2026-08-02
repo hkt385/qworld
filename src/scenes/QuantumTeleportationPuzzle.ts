@@ -4,11 +4,14 @@ import AudioManager from "../utils/AudioManager";
 export default class QuantumTeleportationPuzzle extends Phaser.Scene {
 
     private stage = 0;
+    private quantumLink!: Phaser.GameObjects.Line;
+private aliceBox!: Phaser.GameObjects.Rectangle;
+private bobBox!: Phaser.GameObjects.Rectangle;
 
     private info!: Phaser.GameObjects.Text;
     private alice!: Phaser.GameObjects.Text;
     private bob!: Phaser.GameObjects.Text;
-
+private networkStatus!: Phaser.GameObjects.Text;
     private classicalBits = "";
     private correctGate = "";
 
@@ -26,60 +29,118 @@ export default class QuantumTeleportationPuzzle extends Phaser.Scene {
         this.cameras.main.setBackgroundColor("#12082A");
 
         this.add.text(
-            width / 2,
-            60,
-            "Quantum Teleportation Puzzle",
-            {
-                fontSize: "40px",
-                color: "#FFD700"
-            }
-        ).setOrigin(0.5);
+    width / 2,
+    50,
+    "🌐 Quantum Communication Network",
+    {
+        fontSize: "38px",
+        color: "#FFD700",
+        fontStyle: "bold"
+    }
+).setOrigin(0.5);
 
         this.info = this.add.text(
-            width / 2,
-            120,
-            "Step 1: Create Entanglement",
-            {
-                fontSize: "24px",
-                color: "#FFFFFF",
-                align: "center"
-            }
-        ).setOrigin(0.5);
+    width / 2,
+    110,
+    "Step 1\nCreate a Quantum Link",
+    {
+        fontSize: "22px",
+        color: "#FFFFFF",
+        align: "center",
+        wordWrap: {
+            width: 700
+        }
+    }
+).setOrigin(0.5);
 
-        this.alice = this.add.text(
-            260,
-            320,
-            "Alice\n|ψ⟩",
-            {
-                fontSize: "34px",
-                backgroundColor: "#2D1B55",
-                padding: {
-                    left: 20,
-                    right: 20,
-                    top: 15,
-                    bottom: 15
-                },
-                align: "center"
-            }
-        ).setOrigin(0.5);
+        this.aliceBox = this.add.rectangle(
+    260,
+    320,
+    220,
+    160,
+    0x253B80
+)
+.setStrokeStyle(4,0x66CCFF);
 
-        this.bob = this.add.text(
-            1020,
-            320,
-            "Bob\n|0⟩",
-            {
-                fontSize: "34px",
-                backgroundColor: "#2D1B55",
-                padding: {
-                    left: 20,
-                    right: 20,
-                    top: 15,
-                    bottom: 15
-                },
-                align: "center"
-            }
-        ).setOrigin(0.5);
+this.add.text(
+    260,
+    270,
+    "💻 Alice",
+    {
+        fontSize:"28px",
+        color:"#FFFFFF"
+    }
+).setOrigin(0.5);
 
+this.alice = this.add.text(
+    260,
+    335,
+    "|ψ⟩",
+    {
+        fontSize:"42px",
+        color:"#00FFFF"
+    }
+).setOrigin(0.5);
+this.bobBox = this.add.rectangle(
+    1020,
+    320,
+    220,
+    160,
+    0x253B80
+)
+.setStrokeStyle(4,0x66CCFF);
+
+this.add.text(
+    1020,
+    270,
+    "💻 Bob",
+    {
+        fontSize:"28px",
+        color:"#FFFFFF"
+    }
+).setOrigin(0.5);
+
+this.bob = this.add.text(
+    1020,
+    335,
+    "|0⟩",
+    {
+        fontSize:"42px",
+        color:"#00FFFF"
+    }
+).setOrigin(0.5);
+this.quantumLink = this.add.line(
+    640,
+    320,
+    -270,
+    0,
+    270,
+    0,
+    0x555555
+);
+
+this.quantumLink
+    .setLineWidth(8)
+    .setAlpha(0.25);
+this.add.text(
+    640,
+    250,
+    "Network Status",
+    {
+        fontSize:"22px",
+        color:"#AAAAAA"
+    }
+).setOrigin(0.5);
+
+ this.networkStatus = this.add.text(
+    640,
+    285,
+    "🔴 Offline",
+    {
+        fontSize:"26px",
+        color:"#FF5555"
+    }
+).setOrigin(0.5);
         // Entangle Button
         this.createButton(
             150,
@@ -174,49 +235,73 @@ export default class QuantumTeleportationPuzzle extends Phaser.Scene {
 
     if (this.stage !== 0) {
 
-        this.info.setText("❌ Create entanglement first.");
+        this.info.setText(
+            "❌ Create the quantum link first."
+        );
+
         return;
 
     }
 
     this.stage = 1;
 
-    this.alice.setText(
-`Alice
-|E⟩`
-    );
+    this.alice.setText("|E⟩");
+    this.bob.setText("|E⟩");
 
-    this.bob.setText(
-`Bob
-|E⟩`
-    );
+    this.networkStatus.setText("🟢 Entangled");
+    this.networkStatus.setColor("#00FF88");
 
-    // Draw entanglement line
-    const line = this.add.line(
-        640,
-        320,
-        -280,
-        0,
-        280,
-        0,
-        0x00ffff
-    ).setLineWidth(4);
+    this.quantumLink.setStrokeStyle(8, 0x00FFFF);
+    this.quantumLink.setAlpha(1);
 
     this.tweens.add({
-        targets: line,
-        alpha: { from: 0.2, to: 1 },
+
+        targets: this.quantumLink,
+
+        alpha: {
+            from: 0.3,
+            to: 1
+        },
+
         duration: 500,
+
         yoyo: true,
+
         repeat: -1
+
+    });
+
+    this.tweens.add({
+
+        targets: [
+            this.aliceBox,
+            this.bobBox
+        ],
+
+        alpha: {
+            from: 0.7,
+            to: 1
+        },
+
+        duration: 400,
+
+        yoyo: true,
+
+        repeat: -1
+
     });
 
     this.info.setText(
-`✅ Entanglement Created!
 
-Alice and Bob now share an entangled pair.
+`✅ Quantum Link Established!
 
-Step 2:
-Measure Alice.`
+Alice and Bob are now connected
+through an entangled quantum channel.
+
+Next Step
+
+Measure Alice's Qubit.`
+
     );
 
 }

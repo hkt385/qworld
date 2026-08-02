@@ -6,7 +6,7 @@ import QBot from "../objects/QBot";
 
 export default class AcademyInterior extends Phaser.Scene {
     private selectedSemester = "1";
-    
+    private professorTapped = false;
 
     private player!: Phaser.Physics.Arcade.Sprite;
     private professor!: Phaser.Physics.Arcade.Sprite;
@@ -122,6 +122,8 @@ private isTouching = false;
         );
 
         this.player.setScale(2);
+        this.player.setSize(12, 14);
+this.player.setOffset(2, 2);
         this.player.setDepth(100);
         this.player.setCollideWorldBounds(true);
 
@@ -133,6 +135,11 @@ private isTouching = false;
 
         this.professor.setScale(0.06);
         this.professor.setDepth(100);
+        this.professor.setInteractive();
+
+this.professor.on("pointerdown", () => {
+    this.professorTapped = true;
+});
 
         this.qbot = new QBot(
             this,
@@ -140,7 +147,7 @@ private isTouching = false;
             this.player.y - 20
         );
 
-        this.physics.add.collider(this.player, this.professor);
+        //this.physics.add.collider(this.player, this.professor);
 
         if (collisionLayer) {
             this.physics.add.collider(
@@ -167,7 +174,7 @@ private isTouching = false;
         this.talkPrompt = this.add.text(
             0,
             0,
-            "Press T to Talk",
+            "Tap to Talk",
             {
                 fontSize: "14px",
                 color: "#ffffff",
@@ -229,44 +236,7 @@ this.input.on("pointerup", () => {
         }
 
         // Open / Close Journal
-        if (Phaser.Input.Keyboard.JustDown(this.interactKey)) {
-
-    this.questUI.completeQuest("Talk to Professor Qubit");
-
-    if (this.selectedSemester === "1") {
-
-    ui.showDialogue([
-        "Welcome to QWorld Academy!",
-        "Professor Qubit: Your first lesson is about Binary and Bits.",
-        
-    ]);
-
-    this.waitForContinue("Classroom1");
-
-} else if (this.selectedSemester === "2") {
-
-    ui.showDialogue([
-        "Welcome back!",
-        "Professor Qubit: Let's begin Semester 2.",
-        "Press SPACE, ENTER or CLICK to start."
-    ]);
-
-    this.waitForContinue("Classroom7");
-
-} else if (this.selectedSemester === "3") {
-
-    ui.showDialogue([
-        "Welcome back!",
-        "Professor Qubit: This is your final semester.",
-        "Press SPACE, ENTER or CLICK to begin Semester 3."
-    ]);
-
-    this.waitForContinue("Classroom13");
-
-}
-
-    return;
-}
+       
 
         const speed = 180;
 
@@ -336,21 +306,14 @@ if (this.isTouching) {
                 this.professor.x,
                 this.professor.y - 35
             );
-   const pointer = this.input.activePointer;
+  
 
-const tappedProfessor =
-    pointer.isDown &&
-    Phaser.Math.Distance.Between(
-        pointer.worldX,
-        pointer.worldY,
-        this.professor.x,
-        this.professor.y
-    ) < 40;
-
-            if (
+     if (
     Phaser.Input.Keyboard.JustDown(this.interactKey) ||
-    tappedProfessor
+    this.professorTapped
 ) {
+
+    this.professorTapped = false;
 
     this.questUI.completeQuest("Talk to Professor Qubit");
 

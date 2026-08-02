@@ -2,7 +2,8 @@ import Phaser from "phaser";
 import AudioManager from "../utils/AudioManager";
 
 export default class LatticePuzzle extends Phaser.Scene {
-
+private cursors!: Phaser.Types.Input.Keyboard.CursorKeys;
+private dpad!: Phaser.GameObjects.Container;
     private tileSize = 64;
 
     private level = 0;
@@ -46,8 +47,7 @@ export default class LatticePuzzle extends Phaser.Scene {
 
     private player!:Phaser.GameObjects.Rectangle;
 
-    
-    private cursors!:Phaser.Types.Input.Keyboard.CursorKeys;
+
 
     constructor(){
 
@@ -55,37 +55,19 @@ export default class LatticePuzzle extends Phaser.Scene {
 
     }
 
-    create(){
+    create() {
 
-        AudioManager.play(this,"puzzleMusic",0.25);
+    AudioManager.play(this,"puzzleMusic",0.25);
 
-        this.cameras.main.setBackgroundColor("#081421");
+    this.cameras.main.setBackgroundColor("#081421");
 
-        this.add.text(
+    this.cursors = this.input.keyboard!.createCursorKeys();
 
-    640,
-    40,
+    this.loadLevel();
 
-    "LATTICE NAVIGATION CHALLENGE\n\n" +
-    "🟦 Blue = Your Position\n" +
-    "🟩 Green = Goal\n" +
-    "🟥 Red = Blocked Path\n\n" +
-    "Use the ARROW KEYS to move.\n" +
-    "Find the shortest path to the goal!",
+    this.createDPad();
 
-    {
-        fontSize: "24px",
-        color: "#ffffff",
-        align: "center"
-    }
-
-).setOrigin(0.5);
-
-        this.cursors=this.input.keyboard!.createCursorKeys();
-
-        this.loadLevel();
-
-    }
+}
 
     private loadLevel(){
 
@@ -163,6 +145,7 @@ Use ← ↑ ↓ → to move Find the shortest path!`,
             0x00BFFF
 
         ).setOrigin(0);
+        this.createDPad();
 
     }
         private tryMove(rowOffset:number,colOffset:number){
@@ -224,6 +207,58 @@ Use ← ↑ ↓ → to move Find the shortest path!`,
         );
 
     }
+    private createDPad() {
+
+    this.dpad = this.add.container(0, 0);
+
+    const createButton = (
+        x:number,
+        y:number,
+        text:string,
+        row:number,
+        col:number
+    ) => {
+
+        const bg = this.add.rectangle(
+            x,
+            y,
+            70,
+            70,
+            0x6A0DAD
+        )
+        .setStrokeStyle(2,0xffffff)
+        .setInteractive();
+
+        const label = this.add.text(
+            x,
+            y,
+            text,
+            {
+                fontSize:"34px",
+                color:"#ffffff"
+            }
+        ).setOrigin(0.5);
+
+        bg.on("pointerdown",()=>{
+
+            this.tryMove(row,col);
+
+        });
+
+        this.dpad.add(bg);
+        this.dpad.add(label);
+
+    };
+
+    createButton(160,620,"◀",0,-1);
+    createButton(260,520,"▲",-1,0);
+    createButton(260,620,"▼",1,0);
+    createButton(360,620,"▶",0,1);
+
+    this.dpad.setScrollFactor(0);
+    this.dpad.setDepth(9999);
+
+}
 
     private nextLevel(){
 
@@ -245,6 +280,12 @@ Use ← ↑ ↓ → to move Find the shortest path!`,
     private showComplete(){
 
         this.children.removeAll();
+
+if (this.dpad) {
+
+    this.dpad.destroy();
+
+}
 
         this.cameras.main.setBackgroundColor("#081421");
 
@@ -310,6 +351,7 @@ Use ← ↑ ↓ → to move Find the shortest path!`,
             }
 
         );
+        
 
     }
 
