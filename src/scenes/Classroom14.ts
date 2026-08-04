@@ -6,7 +6,7 @@ export default class Classroom14 extends BaseClassroom {
 
         super("Classroom14", {
 
-            background: "classroom14_bg",
+            background: "classroom1_bg",
 
             teacherTexture: "professor",
             assistantTexture: "qbot",
