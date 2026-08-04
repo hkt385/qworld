@@ -332,7 +332,7 @@ if (this.isTouching) {
     ui.showDialogue([
         "Welcome back!",
         "Professor Qubit: Let's begin Semester 2.",
-        "Press SPACE to begin Semester 3."
+        "Press SPACE to begin Semester 2."
     ]);
 
     this.waitForContinue("Classroom7");
