@@ -6,6 +6,12 @@ QWorld is a story-driven educational game designed to make quantum computing and
 
 Instead of learning only through textbooks or lectures, players attend virtual classrooms, solve puzzles, complete quizzes, and gradually build their understanding of modern quantum technologies.
 
+## 🎥 Gameplay Demo
+
+Watch the gameplay demonstration here:
+
+https://youtu.be/VJgDaEcXMHU
+
 ---
 
 # Problem Statement
