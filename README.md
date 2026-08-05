@@ -1,5 +1,7 @@
 # QWorld
 
+
+##  Browser-based Educational Game
 ## An Interactive Educational Game for Quantum Computing and Post-Quantum Cryptography
 
 QWorld is a story-driven educational game designed to make quantum computing and post-quantum cryptography accessible to beginners through interactive gameplay.
@@ -16,9 +18,7 @@ https://youtu.be/VJgDaEcXMHU
 
 # Problem Statement
 
-Quantum computing and post-quantum cryptography are becoming increasingly important, but many educational resources are highly technical and difficult for beginners.
-
-QWorld addresses this challenge by transforming complex quantum concepts into an engaging game-based learning experience.
+Quantum computing and post-quantum cryptography are becoming increasingly important, yet many educational resources remain highly technical and difficult for beginners. Learners often struggle to connect theoretical concepts with practical applications. QWorld addresses this challenge by transforming complex quantum concepts into an engaging, interactive, game-based learning experience.
 
 ---
 
@@ -42,17 +42,64 @@ QWorld combines classroom lessons, storytelling, interactive puzzles, and quizze
 Players progress through three semesters, completing lessons and challenges before moving to the next stage.
 
 ---
+# Target Audience
+
+QWorld is designed for:
+
+- High school students
+- Undergraduate students
+- Beginners interested in quantum computing
+- Educators introducing quantum computing concepts
+- Anyone seeking an interactive introduction to post-quantum cryptography
+---
+# Learning Objectives
+
+After completing QWorld, learners should be able to:
+
+- Explain the principles of qubits, superposition, and entanglement.
+- Understand basic quantum gates and quantum teleportation.
+- Describe quantum error correction.
+- Explain why Shor's Algorithm threatens classical cryptography.
+- Understand the motivation behind Post-Quantum Cryptography.
+- Identify ML-KEM and ML-DSA as NIST-standardized algorithms.
+- Recognize lattice-based cryptography as a foundation of modern post-quantum cryptography.
+---
+# Educational Methodology
+
+QWorld follows a progressive learning approach:
+
+1. Classroom instruction introduces new concepts.
+2. Interactive puzzles reinforce learning through practice.
+3. Quizzes assess understanding before progression.
+4. Concepts gradually increase in complexity across three semesters.
+
+This structure combines active learning, gamification, and immediate feedback to improve learner engagement and retention.
+
+---
+# User Guide
+
+1. Start a new game.
+2. Explore the Quantum Academy.
+3. Attend each classroom lesson.
+4. Interact with the professor.
+5. Complete the puzzle.
+6. Finish the quiz.
+7. Unlock the next semester.
+8. Graduate after completing the final assessment.
+
+---
 
 # Features
 
--  Interactive classroom lessons
--  Educational puzzles
--  Story-driven progression
--  Topic-based quizzes
--  Save and resume functionality
--  Mobile-friendly controls
--  Pixel-art graphics
--  Background music and sound effects
+- Interactive classroom lessons
+- Educational puzzles
+- Story-driven progression
+- Topic-based quizzes
+- Save and resume functionality
+- Mobile-friendly controls
+- Progressive semester-based learning
+- Pixel-art graphics
+- Background music and sound effects
 
 ---
 # 📸 Screenshots
@@ -72,7 +119,7 @@ Players progress through three semesters, completing lessons and challenges befo
 <img width="1919" height="902" alt="image" src="https://github.com/user-attachments/assets/1e72be5e-cf88-4c9b-8fdc-f88b7f257c4b" />
 
 
-## Quantum Puzzle
+## Puzzle
 
 <img width="1916" height="894" alt="image" src="https://github.com/user-attachments/assets/7078c40a-e85b-40b9-8275-3cf9e911cef6" />
 
