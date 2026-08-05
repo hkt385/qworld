@@ -123,6 +123,8 @@ public/
 
 # Educational Topics
 The game is divided into three semesters that gradually introduce players to increasingly advanced concepts in quantum computing and post-quantum cryptography.
+
+
 Semester 1
 - Introduction to Quantum Computing
 - Qubits
