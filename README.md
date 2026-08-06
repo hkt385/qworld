@@ -12,7 +12,7 @@ Instead of learning only through textbooks or lectures, players attend virtual c
 
 Watch the gameplay demonstration here:
 
-https://youtu.be/VJgDaEcXMHU
+https://youtu.be/kinq1GSTnic
 
 ---
 
